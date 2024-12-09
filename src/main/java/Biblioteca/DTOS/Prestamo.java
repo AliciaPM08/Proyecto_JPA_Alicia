@@ -1,4 +1,4 @@
-package Biblioteca;
+package Biblioteca.DTOS;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "prestamo")
 public class Prestamo {
+    //Variables
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -17,7 +18,7 @@ public class Prestamo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Biblioteca.Usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -30,6 +31,7 @@ public class Prestamo {
     @Column(name = "fechaDevolucion")
     private LocalDate fechaDevolucion;
 
+    //Getters y setters
     public Integer getId() {
         return id;
     }
@@ -38,11 +40,11 @@ public class Prestamo {
         this.id = id;
     }
 
-    public Biblioteca.Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Biblioteca.Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
