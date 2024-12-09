@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -26,10 +27,10 @@ public class Prestamo {
     private Ejemplar ejemplar;
 
     @Column(name = "fechaInicio", nullable = false)
-    private LocalDate fechaInicio;
+    private Date fechaInicio;
 
     @Column(name = "fechaDevolucion")
-    private LocalDate fechaDevolucion;
+    private Date fechaDevolucion;
 
     //Getters y setters
     public Integer getId() {
@@ -56,19 +57,19 @@ public class Prestamo {
         this.ejemplar = ejemplar;
     }
 
-    public LocalDate getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaDevolucion() {
+    public Date getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+    public void setFechaDevolucion(Date fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 
