@@ -3,11 +3,13 @@ package Biblioteca.DTOS;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "libro")
 public class Libro {
+    //Variables
     @Id
     @Column(name = "isbn", nullable = false, length = 20)
     private String isbn;
@@ -18,9 +20,11 @@ public class Libro {
     @Column(name = "autor", nullable = false, length = 100)
     private String autor;
 
+    //Vinculo con la tabla Ejemplares
     @OneToMany(mappedBy = "isbn")
-    private Set<Ejemplar> ejemplares = new LinkedHashSet<>();
+    private List<Ejemplar> ejemplares;
 
+    //Getters y setters
     public String getIsbn() {
         return isbn;
     }
@@ -45,20 +49,12 @@ public class Libro {
         this.autor = autor;
     }
 
-    public Set<Ejemplar> getEjemplares() {
+    public List<Ejemplar> getEjemplares() {
         return ejemplares;
     }
 
-    public void setEjemplares(Set<Ejemplar> ejemplars) {
-        this.ejemplares = ejemplars;
+    public void setEjemplares(List<Ejemplar> ejemplares) {
+        this.ejemplares = ejemplares;
     }
 
-    @Override
-    public String toString() {
-        return "Libro{" +
-                "isbn='" + isbn + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                '}';
-    }
 }
