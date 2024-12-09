@@ -21,7 +21,7 @@ public class PrestamoDAO {
     }
 
     //Encontrar prestamos mediante el ID
-    public Prestamo findById(int id){
+    public Prestamo findById(Long id){
         return em.find(Prestamo.class, id);
     }
 

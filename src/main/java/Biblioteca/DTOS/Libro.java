@@ -21,7 +21,7 @@ public class Libro {
     private String autor;
 
     //Vinculo con la tabla Ejemplares
-    @OneToMany(mappedBy = "isbn")
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
     private List<Ejemplar> ejemplares;
 
     //Getters y setters

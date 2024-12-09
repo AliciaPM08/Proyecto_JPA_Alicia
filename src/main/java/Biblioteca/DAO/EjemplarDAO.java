@@ -21,7 +21,7 @@ public class EjemplarDAO {
     }
 
     //Encontrar ejemplar mediante id
-    public Ejemplar findById(int id) {
+    public Ejemplar findById(Long id) {
         return em.find(Ejemplar.class, id);
     }
 
@@ -29,5 +29,9 @@ public class EjemplarDAO {
     public List<Ejemplar> findbyLibro(Libro libro) {
         return  em.createQuery("SELECT e FROM Ejemplar e WHERE e.libro = :libro", Ejemplar.class)
                 .setParameter("libro", libro).getResultList();
+    }
+
+    public List<Ejemplar> findByIsbn(String isbn) {
+        return em.createQuery("SELECT e FROM Ejemplar e WHERE e.libro.isbn = :isbn", Ejemplar.class).setParameter("isbn", isbn).getResultList();
     }
 }

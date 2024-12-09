@@ -15,7 +15,7 @@ public class Ejemplar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     //He cambiado isbn por libro, por si necesito algo mas de esa clase
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -28,16 +28,15 @@ public class Ejemplar {
     @Column(name = "estado")
     private String estado;
 
-    //Vinculacion con la clase prestamos
+    //Vinculacion
     @OneToMany(mappedBy = "ejemplar")
     private Set<Prestamo> prestamos = new LinkedHashSet<>();
 
-    //Getters y setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

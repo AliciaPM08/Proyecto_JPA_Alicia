@@ -2,7 +2,6 @@ package Biblioteca.DTOS;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -107,6 +106,7 @@ import java.util.Set;
 
         //Creo un enum para el tipo de Usuario
         public enum TipoUsuario {
-            NORMAL, ADMINISTRADOR
+            normal, administrador
+
         }
     }
