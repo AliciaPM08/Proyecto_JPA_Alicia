@@ -1,4 +1,4 @@
-package Biblioteca;
+package Biblioteca.DTOS;
 
 import jakarta.persistence.*;
 
@@ -19,7 +19,7 @@ public class Libro {
     private String autor;
 
     @OneToMany(mappedBy = "isbn")
-    private Set<Ejemplar> ejemplars = new LinkedHashSet<>();
+    private Set<Ejemplar> ejemplares = new LinkedHashSet<>();
 
     public String getIsbn() {
         return isbn;
@@ -45,12 +45,20 @@ public class Libro {
         this.autor = autor;
     }
 
-    public Set<Ejemplar> getEjemplars() {
-        return ejemplars;
+    public Set<Ejemplar> getEjemplares() {
+        return ejemplares;
     }
 
-    public void setEjemplars(Set<Ejemplar> ejemplars) {
-        this.ejemplars = ejemplars;
+    public void setEjemplares(Set<Ejemplar> ejemplars) {
+        this.ejemplares = ejemplars;
     }
 
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "isbn='" + isbn + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                '}';
+    }
 }
