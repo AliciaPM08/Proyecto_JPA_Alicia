@@ -3,6 +3,7 @@ package Biblioteca.DTOS;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ import java.util.Set;
         private TipoUsuario tipo;
 
         @Column(name = "penalizacionHasta")
-        private LocalDate penalizacionHasta;
+        private Date penalizacionHasta;
 
         //Vinculo con la tabla Prestamos
         @OneToMany(mappedBy = "usuario")
@@ -88,11 +89,11 @@ import java.util.Set;
             this.tipo = tipo;
         }
 
-        public LocalDate getPenalizacionHasta() {
+        public Date getPenalizacionHasta() {
             return penalizacionHasta;
         }
 
-        public void setPenalizacionHasta(LocalDate penalizacionHasta) {
+        public void setPenalizacionHasta(Date penalizacionHasta) {
             this.penalizacionHasta = penalizacionHasta;
         }
 
