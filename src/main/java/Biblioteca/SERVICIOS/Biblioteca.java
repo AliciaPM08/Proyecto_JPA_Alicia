@@ -66,7 +66,7 @@ public class Biblioteca {
         }
 
         prestamo.setFechaInicio(new Date(System.currentTimeMillis()));
-        ejemplar.setEstado("Prestado");
+        ejemplar.setEstado(Ejemplar.Estado.valueOf("prestado"));
         ejemplarDAO.insert(ejemplar);
         prestamoDAO.insert(prestamo);
     }
@@ -74,7 +74,7 @@ public class Biblioteca {
     public void registrarDevoluciones(long id){
         Prestamo prestamo= prestamoDAO.findById(id);
         Ejemplar ejemplar= prestamo.getEjemplar();
-        ejemplar.setEstado("Disponible");
+        ejemplar.setEstado(Ejemplar.Estado.valueOf("Disponible"));
         ejemplarDAO.insert(ejemplar);
 
         prestamo.setFechaDevolucion(new Date(System.currentTimeMillis()));
@@ -89,9 +89,6 @@ public class Biblioteca {
     public Usuario buscarUsuarioPorDni(String dni) {
         return usuarioDAO.findByDni(dni);
     }
-    public void close() {
-        em.close(); emf.close();
-    }
 
     public Ejemplar buscarEjemplarPorID(Long id){
         return ejemplarDAO.findById(id);
@@ -99,5 +96,13 @@ public class Biblioteca {
 
     public List<Ejemplar> buscarEjemplaresPorIsbn(String isbn) {
         return ejemplarDAO.findByIsbn(isbn);
+    }
+
+    public Libro buscarLibroPorIsbn(String isbn){
+        return libroDAO.findById(isbn);
+    }
+
+    public void close() {
+        em.close(); emf.close();
     }
 }

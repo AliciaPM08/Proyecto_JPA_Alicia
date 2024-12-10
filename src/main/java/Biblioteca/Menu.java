@@ -93,19 +93,31 @@ public class Menu {
                             System.out.print("ISBN del libro: ");
                             String isbnEjemplar = scanner.next();
                             System.out.print("Estado (Disponible/Prestado/Dañado): ");
-                            String estado = scanner.nextLine();
+                            String estadoInput = scanner.nextLine();
 
-                            List<Ejemplar> ejemplars= service.buscarEjemplaresPorIsbn(isbnEjemplar);
-                            for(Ejemplar ejemplar : ejemplars){
-                                if("Disponible".equals(ejemplar.getEstado())){
-                                    ejemplar.setEstado(estado);
-                                    service.registrarEjemplar(ejemplar);
-                                    break;
-                                }
+                            Ejemplar.Estado estado;
+                            try{
+                                estado= Ejemplar.Estado.valueOf(estadoInput);
+                            }catch (IllegalArgumentException e){
+                                System.out.println("Estado invalido.");
+                                break;
                             }
-                        } else {
-                            System.out.println("Opción no válida.");
-                        }
+
+                            Ejemplar ejemplar= new Ejemplar();
+                            Libro libro = service.buscarLibroPorIsbn(isbnEjemplar);
+                            if(libro != null){
+                                ejemplar.setLibro(libro);
+                                ejemplar.setEstado(estado);
+
+                                service.registrarEjemplar(ejemplar);
+                                System.out.println("Ejemplar registrada con exito.");
+                            } else {
+                                System.out.println("Libro no encontrado.");
+                            }
+                            } else {
+                                System.out.println("Opcion.");
+                            }
+
                         break;
                     case 4:
                         if (usuarioActual.getTipo() == Usuario.TipoUsuario.administrador) {
@@ -146,7 +158,7 @@ public class Menu {
                         for (Prestamo p : prestamos) {
                             System.out.println("ID Préstamo: " + p.getId());
                             System.out.println("Usuario: " + p.getUsuario().getNombre());
-                            System.out.println("Libro: " + p.getEjemplar());
+                            System.out.println("Libro: " + p.getEjemplar().getLibro());
                             System.out.println("Fecha Inicio: " + p.getFechaInicio());
                             System.out.println("Fecha Devolución: " + p.getFechaDevolucion());
                             System.out.println("-----------");

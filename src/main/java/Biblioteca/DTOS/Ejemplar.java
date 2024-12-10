@@ -26,7 +26,7 @@ public class Ejemplar {
     @ColumnDefault("'Disponible'")
     @Lob
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
 
     //Vinculacion
     @OneToMany(mappedBy = "ejemplar")
@@ -48,11 +48,11 @@ public class Ejemplar {
         this.libro = libro;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -64,5 +64,8 @@ public class Ejemplar {
         this.prestamos = prestamos;
     }
 
-
+    public enum Estado{
+        disponible,prestado, dañado
+    }
 }
+

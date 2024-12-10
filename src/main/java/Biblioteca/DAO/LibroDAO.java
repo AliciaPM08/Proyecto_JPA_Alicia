@@ -18,7 +18,7 @@ public class LibroDAO {
     }
 
     //Encontrar Libros mediante el ISBN
-    public Libro findById(int isbn) {
+    public Libro findById(String isbn) {
         return em.find(Libro.class, isbn);
     }
 }
