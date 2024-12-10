@@ -6,6 +6,7 @@ import Biblioteca.DTOS.Libro;
 import Biblioteca.DTOS.Ejemplar;
 import Biblioteca.DTOS.Prestamo;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,6 +25,10 @@ public class Menu {
                 return;
             }
 
+            if (usuarioActual.getPenalizacionHasta() != null && usuarioActual.getPenalizacionHasta().after(new Date(System.currentTimeMillis()))) {
+                System.out.println("Tiene una penalizacion activa hasta " + usuarioActual.getPenalizacionHasta());
+            }
+
             // Menú
             int opcion = -1;
             while (opcion != 0) {
@@ -34,8 +39,9 @@ public class Menu {
                     System.out.println("3. Registrar Ejemplar");
                     System.out.println("4. Registrar Préstamo");
                     System.out.println("5. Registrar Devolución");
+                    System.out.println("6. Ver ejemplares disponibles");
                 }
-                System.out.println("6. Ver Préstamos");
+                System.out.println("7. Ver Préstamos");
                 System.out.println("0. Salir");
                 System.out.print("Opción: ");
                 opcion = scanner.nextInt();
@@ -79,9 +85,11 @@ public class Menu {
                             String autor = scanner.nextLine();
 
                             Libro libro = new Libro();
+
                             libro.setIsbn(isbn);
                             libro.setTitulo(titulo);
                             libro.setAutor(autor);
+
                             service.registrarLibro(libro);
                         } else {
                             System.out.println("Opción no válida.");
@@ -115,9 +123,8 @@ public class Menu {
                                 System.out.println("Libro no encontrado.");
                             }
                             } else {
-                                System.out.println("Opcion.");
+                                System.out.println("Opcion no valida");
                             }
-
                         break;
                     case 4:
                         if (usuarioActual.getTipo() == Usuario.TipoUsuario.administrador) {
@@ -135,7 +142,12 @@ public class Menu {
                             prestamo.setUsuario(user);
                             prestamo.setEjemplar(ejem);
 
-                            service.registrarPrestamo(prestamo);
+                            try {
+                                service.registrarPrestamo(prestamo);
+                                System.out.println("Prestamo registrada con exito.");
+                            }catch (RuntimeException e){
+                                e.printStackTrace();
+                            }
                         } else {
                             System.out.println("Opción no válida.");
                         }
@@ -153,6 +165,16 @@ public class Menu {
                         }
                         break;
                     case 6:
+                        if(usuarioActual.getTipo() == Usuario.TipoUsuario.administrador){
+                            System.out.print("ISBN del libro ");
+                            String isbnlibro= scanner.nextLine();
+                            long disponibles = service.contarDisponibles(isbnlibro);
+                            System.out.println("Ejemplares disponibles: "+ disponibles);
+                        }else{
+                            System.out.println("Opcion no valida.");
+                        }
+                        break;
+                    case 7:
                         // Ver Préstamos
                         List<Prestamo> prestamos = service.verPrestamos(usuarioActual);
                         for (Prestamo p : prestamos) {

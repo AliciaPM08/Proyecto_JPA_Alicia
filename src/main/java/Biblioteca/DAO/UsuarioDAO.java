@@ -17,11 +17,6 @@ public class UsuarioDAO {
         em.getTransaction().commit();
     }
 
-    //Encontrar Usuario mediante el ID
-    public Usuario findById(int id) {
-        return em.find(Usuario.class, id);
-    }
-
     //Encontrar Usuario pr DNI
     public Usuario findByDni(String dni) {
         return em.createQuery("SELECT u FROM Usuario u WHERE u.dni= :dni", Usuario.class)

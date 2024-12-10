@@ -25,13 +25,9 @@ public class EjemplarDAO {
         return em.find(Ejemplar.class, id);
     }
 
-    //Encontrar ejmeplar mediante el libro
-    public List<Ejemplar> findbyLibro(Libro libro) {
-        return  em.createQuery("SELECT e FROM Ejemplar e WHERE e.libro = :libro", Ejemplar.class)
-                .setParameter("libro", libro).getResultList();
-    }
-
-    public List<Ejemplar> findByIsbn(String isbn) {
-        return em.createQuery("SELECT e FROM Ejemplar e WHERE e.libro.isbn = :isbn", Ejemplar.class).setParameter("isbn", isbn).getResultList();
+    //Muestra los libros que estan disponibles
+    public long countDisponibles(String isbn){
+        return em.createQuery("SELECT COUNT(e) FROM Ejemplar e WHERE e.libro.isbn = :isbn AND e.estado= :estado", Long.class)
+                .setParameter("isbn", isbn).setParameter("estado", Ejemplar.Estado.Disponible).getSingleResult();
     }
 }

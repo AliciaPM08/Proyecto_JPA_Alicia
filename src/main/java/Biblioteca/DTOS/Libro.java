@@ -57,6 +57,7 @@ public class Libro {
         this.ejemplares = ejemplares;
     }
 
+    //To String
     @Override
     public String toString() {
         return "Libro{" +

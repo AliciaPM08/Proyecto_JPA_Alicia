@@ -23,8 +23,9 @@ public class Ejemplar {
     @JoinColumn(name = "isbn", nullable = false)
     private Libro libro;
 
+    //Cambio utilizo enum tambien para la variable estado
     @ColumnDefault("'Disponible'")
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private Estado estado;
 
@@ -32,6 +33,7 @@ public class Ejemplar {
     @OneToMany(mappedBy = "ejemplar")
     private Set<Prestamo> prestamos = new LinkedHashSet<>();
 
+    //Getters y setters
     public Long getId() {
         return id;
     }
@@ -64,8 +66,9 @@ public class Ejemplar {
         this.prestamos = prestamos;
     }
 
+    //Tipo enum
     public enum Estado{
-        disponible,prestado, dañado
+        Disponible,Prestado, Dañado
     }
 }
 

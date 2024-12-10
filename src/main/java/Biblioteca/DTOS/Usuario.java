@@ -13,7 +13,7 @@ import java.util.Set;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", nullable = false)
-        private Integer id;
+        private Long id;
 
         @Column(name = "dni", nullable = false, length = 15)
         private String dni;
@@ -40,11 +40,11 @@ import java.util.Set;
         private Set<Prestamo> prestamos = new LinkedHashSet<>();
 
         //Getters y setters
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
